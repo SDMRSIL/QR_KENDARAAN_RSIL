@@ -3,41 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Data Kendaraan Dinas</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .label { font-weight: bold; }
+  </style>
 </head>
 <body>
   <h2>Data Kendaraan Dinas</h2>
-  <div id="konten">Memuat...</div>
+  <div id="konten">Loading...</div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
+    const id = urlParams.get("id"); // misal: M003
 
     fetch("https://opensheet.elk.sh/1O7KgDZqvmjhqWEwx0Vk9LdJuiea5M6QBXhfNvXDyu08/KARTU")
       .then(res => res.json())
       .then(data => {
-        const kendaraan = data.find(row => row.Kode === id);
-        if (!kendaraan) {
-          document.getElementById("konten").innerText = "Data tidak ditemukan.";
+        if (!id) {
+          document.getElementById("konten").innerText = "ID tidak ditemukan di URL.";
           return;
         }
 
-        const html = `
-          <p><strong>Kode:</strong> ${kendaraan.Kode}</p>
-          <p><strong>Nopol:</strong> ${kendaraan.Nopol}</p>
-          <p><strong>Kendaraan:</strong> ${kendaraan.Kendaraan}</p>
-          <p><strong>Pemilik:</strong> ${kendaraan.Pemilik}</p>
-          <p><strong>Alamat:</strong> ${kendaraan["Alamat Pemilik"]}</p>
-          <p><strong>STNKB:</strong> ${kendaraan["Masa Berlaku STNKB"]}</p>
-          <p><strong>Merk:</strong> ${kendaraan.Merk}</p>
-          <p><strong>Nomor Rangka:</strong> ${kendaraan["Nomor Rangka"]}</p>
-          <p><strong>Nomor Mesin:</strong> ${kendaraan["Nomor Mesin"]}</p>
-          <p><strong>Warna:</strong> ${kendaraan.Warna}</p>
-          <p><strong>Bahan Bakar:</strong> ${kendaraan["Bahan Bakar"]}</p>
-          <p><strong>Warna TNKB:</strong> ${kendaraan["Warna TNKB"]}</p>
-          <p><strong>Nomor BPKB:</strong> ${kendaraan["Nomor BPKB"]}</p>
-        `;
+        const hasil = data
+          .filter(row => row[id]) // hanya baris yg punya data di kolom M003
+          .filter(row => row["Kode"]) // abaikan baris kosong
+          .map(row => `<p><span class="label">${row["Kode"]}</span> ${row[id].replace(/^:\s*/, "")}</p>`) // hapus awalan ": "
 
-        document.getElementById("konten").innerHTML = html;
+        if (hasil.length === 0) {
+          document.getElementById("konten").innerText = "Data tidak ditemukan.";
+        } else {
+          document.getElementById("konten").innerHTML = hasil.join("");
+        }
+      })
+      .catch(err => {
+        document.getElementById("konten").innerText = "Gagal mengambil data.";
+        console.error(err);
       });
   </script>
 </body>
