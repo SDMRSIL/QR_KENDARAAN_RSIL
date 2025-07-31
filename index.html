@@ -45,6 +45,14 @@
       flex: 1;
     }
 
+    .highlight {
+      background-color: #fff59d;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
     @media screen and (max-width: 600px) {
       .data-row {
         flex-direction: column;
@@ -93,10 +101,7 @@
           <div class="data-row"><div class="label">Bahan Bakar</div><div class="value">${kendaraan["Bahan Bakar"]}</div></div>
           <div class="data-row"><div class="label">Warna TNKB</div><div class="value">${kendaraan["Warna TNKB"]}</div></div>
           <div class="data-row"><div class="label">Nomor BPKB</div><div class="value">${kendaraan["Nomor BPKB"]}</div></div>
-          <div class="data-row">
-            <div class="label">Masa Berlaku STNKB</div>
-            <div class="value highlight">${kendaraan["Masa Berlaku STNKB"]}</div>
-          </div>
+          <div class="data-row"><div class="label">Masa Berlaku STNKB</div><div class="value highlight">${kendaraan["Masa Berlaku STNKB"]}</div></div>
         `;
 
         document.getElementById("konten").innerHTML = html;
