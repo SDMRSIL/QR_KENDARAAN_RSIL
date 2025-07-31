@@ -8,14 +8,26 @@
     body {
       font-family: 'Roboto', sans-serif;
       margin: 40px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h2 {
+      color: #00695c;
     }
     .label {
       display: inline-block;
-      width: 180px;
+      width: 200px;
       font-weight: bold;
     }
     .data-row {
       margin-bottom: 6px;
+    }
+    #konten {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
     }
   </style>
 </head>
@@ -25,4 +37,23 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    cons
+    const id = urlParams.get("id");
+
+    fetch("https://opensheet.elk.sh/1O7KgDZqvmjhqWEwx0Vk9LdJuiea5M6QBXhfNvXDyu08/KARTU")
+      .then(res => res.json())
+      .then(data => {
+        console.log("Data berhasil diambil:", data);
+
+        const kendaraan = data.find(row => (row.Kode || "").trim() === id);
+
+        if (!kendaraan) {
+          document.getElementById("konten").innerText = "❌ Data tidak ditemukan.";
+          return;
+        }
+
+        const html = `
+          <div class="data-row"><span class="label">Kode:</span> ${kendaraan.Kode}</div>
+          <div class="data-row"><span class="label">Nopol:</span> ${kendaraan.Nopol}</div>
+          <div class="data-row"><span class="label">Kendaraan:</span> ${kendaraan.Kendaraan}</div>
+          <div class="data-row"><span class="label">Pemilik:</span> ${kendaraan.Pemilik}</div>
+          <div class="data-row"><span class="label">Alamat Pemilik:</s
