@@ -56,4 +56,28 @@
           <div class="data-row"><span class="label">Nopol:</span> ${kendaraan.Nopol}</div>
           <div class="data-row"><span class="label">Kendaraan:</span> ${kendaraan.Kendaraan}</div>
           <div class="data-row"><span class="label">Pemilik:</span> ${kendaraan.Pemilik}</div>
-          <div class="data-row"><span class="label">Alamat Pemilik:</s
+          <div class="data-row"><span class="label">Alamat Pemilik:</span> ${kendaraan["Alamat Pemilik"]}</div>
+          <div class="data-row"><span class="label">Masa Berlaku STNKB:</span> ${kendaraan["Masa Berlaku STNKB"]}</div>
+          <div class="data-row"><span class="label">Merk:</span> ${kendaraan.Merk}</div>
+          <div class="data-row"><span class="label">Type:</span> ${kendaraan.Type}</div>
+          <div class="data-row"><span class="label">Jenis:</span> ${kendaraan.Jenis}</div>
+          <div class="data-row"><span class="label">Model:</span> ${kendaraan.Model}</div>
+          <div class="data-row"><span class="label">Tahun Pembuatan:</span> ${kendaraan["Tahun Pembuatan"]}</div>
+          <div class="data-row"><span class="label">Isi Silinder:</span> ${kendaraan["Isi Silinder"]}</div>
+          <div class="data-row"><span class="label">Nomor Rangka:</span> ${kendaraan["Nomor Rangka"]}</div>
+          <div class="data-row"><span class="label">Nomor Mesin:</span> ${kendaraan["Nomor Mesin"]}</div>
+          <div class="data-row"><span class="label">Warna:</span> ${kendaraan.Warna}</div>
+          <div class="data-row"><span class="label">Bahan Bakar:</span> ${kendaraan["Bahan Bakar"]}</div>
+          <div class="data-row"><span class="label">Warna TNKB:</span> ${kendaraan["Warna TNKB"]}</div>
+          <div class="data-row"><span class="label">Nomor BPKB:</span> ${kendaraan["Nomor BPKB"]}</div>
+        `;
+
+        document.getElementById("konten").innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById("konten").innerText = "⚠️ Gagal memuat data.";
+        console.error("Gagal mengambil data:", err);
+      });
+  </script>
+</body>
+</html>
