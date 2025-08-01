@@ -107,8 +107,9 @@
           <div class="data-row"><div class="label">Masa Berlaku STNKB</div><div class="value highlight">${safe(kendaraan["Masa Berlaku STNKB"])}</div></div>
         `;
 
+        
         // 🔹 Judul tambahan untuk PKB
-        html += `<div class="data-row"><div class="label" style="font-weight:bold; color:#00695c">📅 Riwayat Pembayaran PKB</div><div class="value"></div></div>`;
+            html += `<div class="data-row" style="margin-top:20px; font-weight:bold; color:#00695c; font-size:17px;">📅 Riwayat Pembayaran PKB</div>`;
 
         // 🔹 Tambahkan kolom PKB (1–10)
         for (let i = 1; i <= 10; i++) {
@@ -117,7 +118,7 @@
         }
 
        // 🔹 Judul tambahan untuk Uji Berkala
-        html += `<div class="data-row"><div class="label" style="font-weight:bold; color:#00695c">📅 Riwayat Uji Berkala / KIR</div><div class="value"></div></div>`;
+           html += `<div class="data-row"><div class="label" style="font-weight:bold; color:#00695c">📅 Riwayat Uji Berkala / KIR</div><div class="value"></div></div>`;
         
         // Tambahkan kolom Uji Berkala (1) sampai Uji Berkala (10)
         for (let i = 1; i <= 10; i++) {
