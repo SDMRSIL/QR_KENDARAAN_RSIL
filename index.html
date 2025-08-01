@@ -54,6 +54,13 @@
       display: inline-block;
     }
 
+    .section-title {
+      font-weight: bold;
+      color: #00695c;
+      font-size: 17px;
+      margin: 20px 0 10px;
+    }
+
     @media screen and (max-width: 600px) {
       .data-row {
         flex-direction: column;
@@ -84,7 +91,8 @@
           return;
         }
 
-        const safe = (value) => value ? value : "-";
+        // Tampilkan : sebelum nilai
+        const safe = (value) => value ? `: ${value}` : ": -";
 
         let html = `
           <div class="data-row"><div class="label">Kode</div><div class="value">${safe(kendaraan.Kode)}</div></div>
@@ -107,20 +115,15 @@
           <div class="data-row"><div class="label">Masa Berlaku STNKB</div><div class="value highlight">${safe(kendaraan["Masa Berlaku STNKB"])}</div></div>
         `;
 
-        
-        // 🔹 Judul tambahan untuk PKB
-            html += `<div class="data-row" style="margin-top:20px; font-weight:bold; color:#00695c; font-size:17px;">📅 Riwayat Pembayaran PKB</div>`;
-
-        // 🔹 Tambahkan kolom PKB (1–10)
+        // 📅 Riwayat Pembayaran PKB
+        html += `<div class="section-title">📅 Riwayat Pembayaran PKB</div>`;
         for (let i = 1; i <= 10; i++) {
           const key = `PKB (${i})`;
           html += `<div class="data-row"><div class="label">${key}</div><div class="value">${safe(kendaraan[key])}</div></div>`;
         }
 
-       // 🔹 Judul tambahan untuk Uji Berkala
-           html += `<div class="data-row"><div class="label" style="font-weight:bold; color:#00695c">📅 Riwayat Uji Berkala / KIR</div><div class="value"></div></div>`;
-        
-        // Tambahkan kolom Uji Berkala (1) sampai Uji Berkala (10)
+        // 📅 Riwayat Uji Berkala
+        html += `<div class="section-title">📅 Riwayat Uji Berkala / KIR</div>`;
         for (let i = 1; i <= 10; i++) {
           const key = `Uji Berkala (${i})`;
           html += `<div class="data-row"><div class="label">${key}</div><div class="value">${safe(kendaraan[key])}</div></div>`;
