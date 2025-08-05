@@ -91,51 +91,50 @@
           return;
         }
 
-        // Tampilkan : sebelum nilai
-        const safe = (value) => value ? `: ${value}` : ": -";
+        const safe = (value) => value ? value : "-";
 
         let html = `
-          <div class="data-row"><div class="label">Kode</div><div class="value">${safe(kendaraan.Kode)}</div></div>
-          <div class="data-row"><div class="label">Nopol</div><div class="value">${safe(kendaraan.Nopol)}</div></div>
-          <div class="data-row"><div class="label">Kendaraan</div><div class="value">${safe(kendaraan.Kendaraan)}</div></div>
-          <div class="data-row"><div class="label">Pemilik</div><div class="value">${safe(kendaraan.Pemilik)}</div></div>
-          <div class="data-row"><div class="label">Alamat Pemilik</div><div class="value">${safe(kendaraan["Alamat Pemilik"])}</div></div>
-          <div class="data-row"><div class="label">Merk</div><div class="value">${safe(kendaraan.Merk)}</div></div>
-          <div class="data-row"><div class="label">Type</div><div class="value">${safe(kendaraan.Type)}</div></div>
-          <div class="data-row"><div class="label">Jenis</div><div class="value">${safe(kendaraan.Jenis)}</div></div>
-          <div class="data-row"><div class="label">Model</div><div class="value">${safe(kendaraan.Model)}</div></div>
-          <div class="data-row"><div class="label">Tahun Pembuatan</div><div class="value">${safe(kendaraan["Tahun Pembuatan"])}</div></div>
-          <div class="data-row"><div class="label">Isi Silinder</div><div class="value">${safe(kendaraan["Isi Silinder"])}</div></div>
-          <div class="data-row"><div class="label">Nomor Rangka</div><div class="value">${safe(kendaraan["Nomor Rangka"])}</div></div>
-          <div class="data-row"><div class="label">Nomor Mesin</div><div class="value">${safe(kendaraan["Nomor Mesin"])}</div></div>
-          <div class="data-row"><div class="label">Warna</div><div class="value">${safe(kendaraan.Warna)}</div></div>
-          <div class="data-row"><div class="label">Bahan Bakar</div><div class="value">${safe(kendaraan["Bahan Bakar"])}</div></div>
-          <div class="data-row"><div class="label">Warna TNKB</div><div class="value">${safe(kendaraan["Warna TNKB"])}</div></div>
-          <div class="data-row"><div class="label">Nomor BPKB</div><div class="value">${safe(kendaraan["Nomor BPKB"])}</div></div>
-          <div class="data-row"><div class="label">Masa Berlaku STNKB</div><div class="value highlight">${safe(kendaraan["Masa Berlaku STNKB"])}</div></div>
+          <div class="data-row"><div class="label">Kode:</div><div class="value">${safe(kendaraan.Kode)}</div></div>
+          <div class="data-row"><div class="label">Nopol:</div><div class="value">${safe(kendaraan.Nopol)}</div></div>
+          <div class="data-row"><div class="label">Kendaraan:</div><div class="value">${safe(kendaraan.Kendaraan)}</div></div>
+          <div class="data-row"><div class="label">Pemilik:</div><div class="value">${safe(kendaraan.Pemilik)}</div></div>
+          <div class="data-row"><div class="label">Alamat Pemilik:</div><div class="value">${safe(kendaraan["Alamat Pemilik"])}</div></div>
+          <div class="data-row"><div class="label">Merk:</div><div class="value">${safe(kendaraan.Merk)}</div></div>
+          <div class="data-row"><div class="label">Type:</div><div class="value">${safe(kendaraan.Type)}</div></div>
+          <div class="data-row"><div class="label">Jenis:</div><div class="value">${safe(kendaraan.Jenis)}</div></div>
+          <div class="data-row"><div class="label">Model:</div><div class="value">${safe(kendaraan.Model)}</div></div>
+          <div class="data-row"><div class="label">Tahun Pembuatan:</div><div class="value">${safe(kendaraan["Tahun Pembuatan"])}</div></div>
+          <div class="data-row"><div class="label">Isi Silinder:</div><div class="value">${safe(kendaraan["Isi Silinder"])}</div></div>
+          <div class="data-row"><div class="label">Nomor Rangka:</div><div class="value">${safe(kendaraan["Nomor Rangka"])}</div></div>
+          <div class="data-row"><div class="label">Nomor Mesin:</div><div class="value">${safe(kendaraan["Nomor Mesin"])}</div></div>
+          <div class="data-row"><div class="label">Warna:</div><div class="value">${safe(kendaraan.Warna)}</div></div>
+          <div class="data-row"><div class="label">Bahan Bakar:</div><div class="value">${safe(kendaraan["Bahan Bakar"])}</div></div>
+          <div class="data-row"><div class="label">Warna TNKB:</div><div class="value">${safe(kendaraan["Warna TNKB"])}</div></div>
+          <div class="data-row"><div class="label">Nomor BPKB:</div><div class="value">${safe(kendaraan["Nomor BPKB"])}</div></div>
+          <div class="data-row"><div class="label">Masa Berlaku STNKB:</div><div class="value highlight">${safe(kendaraan["Masa Berlaku STNKB"])}</div></div>
         `;
 
-        // 📅 Riwayat Pembayaran PKB
+        // 📅 Riwayat PKB
         html += `<div class="section-title">📅 Riwayat Pembayaran PKB</div>`;
         for (let i = 1; i <= 5; i++) {
           const key = `PKB (${i})`;
-          html += `<div class="data-row"><div class="label">${key}</div><div class="value">${safe(kendaraan[key])}</div></div>`;
+          html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
         }
 
         // 📅 Riwayat Uji Berkala
         html += `<div class="section-title">📅 Riwayat Uji Berkala / KIR</div>`;
         for (let i = 1; i <= 5; i++) {
           const key = `Uji Berkala (${i})`;
-          html += `<div class="data-row"><div class="label">${key}</div><div class="value">${safe(kendaraan[key])}</div></div>`;
+          html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
         }
 
         // 🛠️ Riwayat Service
         html += `<div class="section-title">🛠️ Riwayat Service</div>`;
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 15; i++) {
           const key = `Service (${i})`;
-        html += `<div class="data-row"><div class="label">${key}</div><div class="value">${safe(kendaraan[key])}</div></div>`;
-      }
-        
+          html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
+        }
+
         document.getElementById("konten").innerHTML = html;
       })
       .catch(err => {
