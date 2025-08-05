@@ -130,156 +130,18 @@
         }
 
         // 🛠️ Riwayat Service
-        <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Data Kendaraan Dinas RS Islam Lumajang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 20px;
-      background-color: #f9f9f9;
-      color: #333;
-      font-size: 16px;
-    }
-
-    h2 {
-      color: #00695c;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    #konten {
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      max-width: 800px;
-      box-sizing: border-box;
-    }
-
-    .data-row {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-      line-height: 1.4em;
-    }
-
-    .label {
-      width: 200px;
-      font-weight: 500;
-      color: #007BFF; /* Warna biru */
-    }
-
-    .value {
-      flex: 1;
-      white-space: pre-wrap;
-    }
-
-    .highlight {
-      background-color: #fff59d;
-      font-weight: bold;
-      padding: 4px 8px;
-      border-radius: 4px;
-      display: inline-block;
-    }
-
-    .section-title {
-      font-weight: bold;
-      color: #00695c;
-      font-size: 17px;
-      margin: 20px 0 10px;
-    }
-
-    @media screen and (max-width: 600px) {
-      .data-row {
-        flex-direction: column;
-      }
-
-      .label {
-        width: 100%;
-        margin-bottom: 4px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <h2>Data Kendaraan Dinas RS Islam Lumajang</h2>
-  <div id="konten">Memuat...</div>
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
-
-    fetch("https://opensheet.elk.sh/1O7KgDZqvmjhqWEwx0Vk9LdJuiea5M6QBXhfNvXDyu08/KARTU")
-      .then(res => res.json())
-      .then(data => {
-        const kendaraan = data.find(row => (row.Kode || "").trim() === id);
-
-        if (!kendaraan) {
-          document.getElementById("konten").innerText = "❌ Data tidak ditemukan.";
-          return;
-        }
-
-        const safe = (value) => value ? value : "-";
-
-        let html = `
-          <div class="data-row"><div class="label">Kode:</div><div class="value">${safe(kendaraan.Kode)}</div></div>
-          <div class="data-row"><div class="label">Nopol:</div><div class="value">${safe(kendaraan.Nopol)}</div></div>
-          <div class="data-row"><div class="label">Kendaraan:</div><div class="value">${safe(kendaraan.Kendaraan)}</div></div>
-          <div class="data-row"><div class="label">Pemilik:</div><div class="value">${safe(kendaraan.Pemilik)}</div></div>
-          <div class="data-row"><div class="label">Alamat Pemilik:</div><div class="value">${safe(kendaraan["Alamat Pemilik"])}</div></div>
-          <div class="data-row"><div class="label">Merk:</div><div class="value">${safe(kendaraan.Merk)}</div></div>
-          <div class="data-row"><div class="label">Type:</div><div class="value">${safe(kendaraan.Type)}</div></div>
-          <div class="data-row"><div class="label">Jenis:</div><div class="value">${safe(kendaraan.Jenis)}</div></div>
-          <div class="data-row"><div class="label">Model:</div><div class="value">${safe(kendaraan.Model)}</div></div>
-          <div class="data-row"><div class="label">Tahun Pembuatan:</div><div class="value">${safe(kendaraan["Tahun Pembuatan"])}</div></div>
-          <div class="data-row"><div class="label">Isi Silinder:</div><div class="value">${safe(kendaraan["Isi Silinder"])}</div></div>
-          <div class="data-row"><div class="label">Nomor Rangka:</div><div class="value">${safe(kendaraan["Nomor Rangka"])}</div></div>
-          <div class="data-row"><div class="label">Nomor Mesin:</div><div class="value">${safe(kendaraan["Nomor Mesin"])}</div></div>
-          <div class="data-row"><div class="label">Warna:</div><div class="value">${safe(kendaraan.Warna)}</div></div>
-          <div class="data-row"><div class="label">Bahan Bakar:</div><div class="value">${safe(kendaraan["Bahan Bakar"])}</div></div>
-          <div class="data-row"><div class="label">Warna TNKB:</div><div class="value">${safe(kendaraan["Warna TNKB"])}</div></div>
-          <div class="data-row"><div class="label">Nomor BPKB:</div><div class="value">${safe(kendaraan["Nomor BPKB"])}</div></div>
-          <div class="data-row"><div class="label">Masa Berlaku STNKB:</div><div class="value highlight">${safe(kendaraan["Masa Berlaku STNKB"])}</div></div>
-        `;
-
-        html += `<div class="section-title">📅 Riwayat Pembayaran PKB</div>`;
-        for (let i = 1; i <= 5; i++) {
-          const key = `PKB (${i})`;
-          html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
-        }
-
-        html += `<div class="section-title">📅 Riwayat Uji Berkala / KIR</div>`;
-        for (let i = 1; i <= 5; i++) {
-          const key = `Uji Berkala (${i})`;
-          html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
-        }
-
         html += `<div class="section-title">🛠️ Riwayat Service</div>`;
         for (let i = 1; i <= 15; i++) {
           const key = `Service (${i})`;
           html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
         }
 
-        // Tambahkan copyright di akhir
-        html += `<div style="margin-top:30px; text-align:center; font-size:14px; color:#888;">
-          &copy; Unit Kendaraan RS Islam Lumajang
-        </div>`;
-
         document.getElementById("konten").innerHTML = html;
       })
       .catch(err => {
-        document.getElementById("konten").innerHTML = `
-          <div style="color:red; font-weight:bold;">
-            ⚠️ Gagal memuat data. Pastikan koneksi internet aktif dan spreadsheet publik.
-          </div>`;
+        document.getElementById("konten").innerText = "⚠️ Gagal memuat data.";
         console.error("Gagal mengambil data:", err);
       });
   </script>
 </body>
 </html>
-
