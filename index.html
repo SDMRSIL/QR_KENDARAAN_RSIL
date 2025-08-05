@@ -39,7 +39,7 @@
     .label {
       width: 200px;
       font-weight: 500;
-      color: #007BFF; /* Warna biru elegan */
+      color: #007BFF;
     }
 
     .value {
@@ -62,6 +62,13 @@
       margin: 20px 0 10px;
     }
 
+    .copyright {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+
     @media screen and (max-width: 600px) {
       .data-row {
         flex-direction: column;
@@ -80,7 +87,7 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
+    const id = urlParams.get("id"); // contoh: ?id=KDR01
 
     fetch("https://opensheet.elk.sh/1O7KgDZqvmjhqWEwx0Vk9LdJuiea5M6QBXhfNvXDyu08/KARTU")
       .then(res => res.json())
@@ -115,31 +122,37 @@
           <div class="data-row"><div class="label">Masa Berlaku STNKB:</div><div class="value highlight">${safe(kendaraan["Masa Berlaku STNKB"])}</div></div>
         `;
 
-        // 📅 Riwayat PKB
+        // PKB
         html += `<div class="section-title">📅 Riwayat Pembayaran PKB</div>`;
         for (let i = 1; i <= 5; i++) {
           const key = `PKB (${i})`;
           html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
         }
 
-        // 📅 Riwayat Uji Berkala
+        // KIR
         html += `<div class="section-title">📅 Riwayat Uji Berkala / KIR</div>`;
         for (let i = 1; i <= 5; i++) {
           const key = `Uji Berkala (${i})`;
           html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
         }
 
-        // 🛠️ Riwayat Service
+        // SERVICE
         html += `<div class="section-title">🛠️ Riwayat Service</div>`;
         for (let i = 1; i <= 15; i++) {
           const key = `Service (${i})`;
           html += `<div class="data-row"><div class="label">${key}:</div><div class="value">${safe(kendaraan[key])}</div></div>`;
         }
 
+        // Copyright
+        html += `<div class="copyright">&copy; @Unit Kendaraan RS Islam Lumajang</div>`;
+
         document.getElementById("konten").innerHTML = html;
       })
       .catch(err => {
-        document.getElementById("konten").innerText = "⚠️ Gagal memuat data.";
+        document.getElementById("konten").innerHTML = `
+          <div style="color:red; font-weight:bold;">
+            ⚠️ Gagal memuat data. Pastikan koneksi internet aktif dan spreadsheet publik.
+          </div>`;
         console.error("Gagal mengambil data:", err);
       });
   </script>
